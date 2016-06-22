@@ -1,0 +1,231 @@
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTextArea;
+import java.awt.Choice;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.*;
+import javax.swing.UIManager;
+import java.util.*;
+import java.io.*;
+
+public class Bid extends JFrame {
+
+	private JFrame frame;
+	private JFrame disp;
+	private JLabel lblfb;
+	private JLabel lblmsft;
+	private JLabel lblgoogl;
+	private JLabel lbltsla;
+	private JLabel lbltxn ;
+	private JLabel lblvrtu;
+	private JLabel lblxlnx;
+	private JLabel lblyhoo;
+	private JComboBox cmb;
+	private JTextArea hisdisp;
+
+	/**
+	 * Main GUI is handling through this class 
+	 */
+	public static void main(String[] args) {
+		Data.initialData(); 
+		Bid f = new Bid();
+
+		ArrayList<His> h = new ArrayList<His>();
+		h.add(new His("Asela","FB",12.5));
+		h.add(new His("Rukmal","MSFT",125.5));
+		h.add(new His("Dilshani","VRTU",132.5));
+		h.add(new His("Gee","TXN",192.5));		
+	}
+
+	public Bid() {
+		
+		frame = new JFrame("Bit Server");
+		frame.getContentPane().setBackground(UIManager.getColor("Button.highlight"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 500, 400);
+		frame.getContentPane().setLayout(null);
+		frame.setBackground(Color.WHITE);
+
+		disp = new JFrame("Histroy details");
+		disp.getContentPane().setBackground(UIManager.getColor("Button.highlight"));
+		disp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		disp.setBounds(100, 100, 300, 300);
+		disp.setBackground(Color.WHITE);
+
+		hisdisp = new JTextArea();
+		hisdisp.setEditable(false);
+		disp.getContentPane().add(BorderLayout.CENTER, hisdisp);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon("../img/msft.png"));
+		lblNewLabel_2.setBounds(28, 74, 30, 30);
+		frame.getContentPane().add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(new ImageIcon("../img/gogl.jpg"));
+		lblNewLabel_3.setBounds(28, 115, 30, 30);
+		frame.getContentPane().add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setIcon(new ImageIcon("../img/Yhoo.png"));
+		lblNewLabel_4.setBounds(28, 156, 30, 30);
+		frame.getContentPane().add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setIcon(new ImageIcon("../img/tsla.jpg"));
+		lblNewLabel_5.setBounds(28, 197, 30, 30);
+		frame.getContentPane().add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_6 = new JLabel("");
+		lblNewLabel_6.setIcon(new ImageIcon("../img/txn.jpg"));
+		lblNewLabel_6.setBounds(28, 238, 30, 30);
+		frame.getContentPane().add(lblNewLabel_6);
+		
+		JLabel lblNewLabel_7 = new JLabel("");
+		lblNewLabel_7.setIcon(new ImageIcon("../img/vrtu.jpg"));
+		lblNewLabel_7.setBounds(28, 279, 50, 30);
+		frame.getContentPane().add(lblNewLabel_7);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("../img/fb.png"));
+		lblNewLabel_1.setBounds(28, 33, 30, 30);
+		frame.getContentPane().add(lblNewLabel_1);
+
+		String [] item = {"FB","MSFT","GOOGL","YHOO","TSLA","TXN","VRTU","XLNX"};
+		cmb = new JComboBox(item);
+		cmb.setBounds(281, 11, 100, 30);
+		cmb.addActionListener(new Histroy());
+		frame.getContentPane().add(cmb);
+				
+		JLabel lblNewLabel_8 = new JLabel("FB");
+		lblNewLabel_8.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		lblNewLabel_8.setBounds(98, 33, 50, 30);
+		frame.getContentPane().add(lblNewLabel_8);
+		
+		JLabel lblNewLabel_9 = new JLabel("GOOGL");
+		lblNewLabel_9.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		lblNewLabel_9.setBounds(98, 115, 50, 30);
+		frame.getContentPane().add(lblNewLabel_9);
+		
+		JLabel lblNewLabel_10 = new JLabel("YHOO");
+		lblNewLabel_10.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		lblNewLabel_10.setBounds(98, 156, 50, 30);
+		frame.getContentPane().add(lblNewLabel_10);
+		
+		JLabel lblNewLabel_11 = new JLabel("TXN");
+		lblNewLabel_11.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		lblNewLabel_11.setBounds(98, 238, 100, 30);
+		frame.getContentPane().add(lblNewLabel_11);
+		
+		JLabel lblNewLabel_12 = new JLabel("MSFT");
+		lblNewLabel_12.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		lblNewLabel_12.setBounds(98, 74, 50, 30);
+		frame.getContentPane().add(lblNewLabel_12);
+		
+		JLabel lblNewLabel_13 = new JLabel("TSLA");
+		lblNewLabel_13.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		lblNewLabel_13.setBounds(98, 197, 66, 30);
+		frame.getContentPane().add(lblNewLabel_13);
+		
+		JLabel lblNewLabel_14 = new JLabel("VRTU");
+		lblNewLabel_14.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		lblNewLabel_14.setBounds(98, 279, 50, 30);
+		frame.getContentPane().add(lblNewLabel_14);
+		
+		JLabel lblNewLabel_16 = new JLabel("");
+		lblNewLabel_16.setIcon(new ImageIcon("../img/xlnx.jpg"));
+		lblNewLabel_16.setBounds(28, 319, 50, 30);
+		frame.getContentPane().add(lblNewLabel_16);
+		
+		JLabel lblNewLabel_17 = new JLabel("XLNX");
+		lblNewLabel_17.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_17.setBounds(98, 319, 40, 30);
+		frame.getContentPane().add(lblNewLabel_17);
+		
+		lblfb = new JLabel("");
+		lblfb.setBackground(new Color(192, 192, 192));
+		lblfb.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblfb.setBounds(221, 33, 50, 30);
+		frame.getContentPane().add(lblfb);
+		
+		lblmsft = new JLabel("");
+		lblmsft.setBackground(new Color(192, 192, 192));
+		lblmsft.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblmsft.setBounds(221, 74, 50, 30);
+		frame.getContentPane().add(lblmsft);
+		
+		lblgoogl = new JLabel("");
+		lblgoogl.setBackground(new Color(192, 192, 192));
+		lblgoogl.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblgoogl.setBounds(221, 115, 50, 30);
+		frame.getContentPane().add(lblgoogl);
+		
+		lbltsla = new JLabel("");
+		lbltsla.setBackground(new Color(192, 192, 192));
+		lbltsla.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lbltsla.setBounds(221, 197, 50, 30);
+		frame.getContentPane().add(lbltsla);
+		
+		lbltxn = new JLabel("");
+		lbltxn.setBackground(new Color(192, 192, 192));
+		lbltxn.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lbltxn.setBounds(221, 238, 50, 30);
+		frame.getContentPane().add(lbltxn);
+		
+		lblvrtu = new JLabel("");
+		lblvrtu.setBackground(new Color(192, 192, 192));
+		lblvrtu.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblvrtu.setBounds(221, 279, 50, 30);
+		frame.getContentPane().add(lblvrtu);
+		
+		lblxlnx = new JLabel("");
+		lblxlnx.setBackground(new Color(192, 192, 192));
+		lblxlnx.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblxlnx.setBounds(221, 319, 50, 30);
+		frame.getContentPane().add(lblxlnx);
+		
+		lblyhoo = new JLabel("");
+		lblyhoo.setBackground(new Color(192, 192, 192));
+		lblyhoo.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblyhoo.setBounds(221, 156, 50, 30);
+		frame.getContentPane().add(lblyhoo);
+
+		frame.setVisible(true);
+                      
+		Thread t = new Thread(new update());
+		t.start();
+	}
+
+	class Histroy implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+                         JComboBox cb = (JComboBox)e.getSource();
+                        SimpleTable.SM = (String)cb.getSelectedItem();
+                        SimpleTable t = new SimpleTable();
+		}
+	}
+	
+	class update implements Runnable{
+		public void run(){
+			while(true){
+			int i;
+			
+			lblyhoo.setText(Double.toString(YHOO.getPrice()));
+			lblxlnx.setText(Double.toString(XLNX.getPrice()));
+			lblfb.setText(Double.toString(FB.getPrice()));
+			lblmsft.setText(Double.toString(MSFT.getPrice()));
+			lbltxn.setText(Double.toString(TXN.getPrice()));
+			lbltsla.setText(Double.toString(TSLA.getPrice()));
+			lblvrtu.setText(Double.toString(VRTU.getPrice()));
+			lblgoogl.setText(Double.toString(GOOGL.getPrice()));
+			}
+		}
+	} 
+}

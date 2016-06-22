@@ -1,0 +1,30 @@
+﻿READ ME
+
+HOW TO USE AUCTION SEVER
+
+Compile TestServer.java in src folder and run View in Linux Based System.
+User should give the "stocks.csv" file to folder contains Java files which contain the following information.
+	1)Symbol
+	2)Security Name
+	3)Price  
+Server Automatically starts after opening View in JAVA VM. 
+
+INSTRUCTIONS TO BIDDERS
+
+I )  Users can use “nc IPADDRESS 2000” in Linux terminal to Start Bidding.
+II)  After user successfully connected ,user must First enter their name in command line.
+III) Then User should enter The Security Name as their wish. 
+IV) If that Security is available for user to bid,Then it will display the Name of the Security and current price of the Security. Else it will show an error message to enter a valid Security.
+V) Then user can enter a bid larger than the current price of the Security. If bid is successful it shows a message "Bid DONE ! enter another bid :". 
+VI)After that user can either end bidding task by typing “quit” or palace another bid.
+
+Note: Once that is done the clients are not allowed to change neither their names
+nor the security that they are bidding on.
+
+INSTRUCTIONS TO SERVER USER
+
+I)The GUI will display  current Prices of SELECTED Securities. 
+II)To view History of each Security user should select a security in combo box to see it's bidding history. It will display the name of the bidder and the price according to time.
+
+
+Note :The Server GUI will not sensitive to updates  happen in 500ms.
